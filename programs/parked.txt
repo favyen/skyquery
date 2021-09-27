@@ -1,0 +1,6 @@
+cars = Detect("cars")
+car_traj = Track(cars)
+stopped = Select(car_traj; "displacement < 75")
+merged = Merge(stopped; "{"DistanceThreshold": 40, "Mode": "image_similarity"}")
+parked = Select(merged; "duration > 600")
+out = ToMatrix(parked; "{"Func": "count", "GridSize": 32, "UnionSeqs": true}")
